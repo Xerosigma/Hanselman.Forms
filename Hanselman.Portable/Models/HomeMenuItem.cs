@@ -4,6 +4,7 @@ namespace Hanselman.Portable
 {
 	public enum MenuType
 	{
+		Events,
 		About,
 		Blog,
 		Twitter,

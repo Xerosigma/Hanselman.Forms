@@ -78,7 +78,7 @@ namespace Hanselman.Portable
           PageSelectionChanged(menuType);
       }
     }
-    private Page about, blog, twitter, hanselminutes, ratchet, developerlife;
+    private Page about, blog, twitter, hanselminutes, ratchet, developerlife, events;
     public HomeMasterView(HomeViewModel viewModel)
     {
       this.Icon = "slideout.png";
@@ -167,7 +167,15 @@ namespace Hanselman.Portable
               ratchet = new PodcastPage(menuItem);
 
             PageSelection = ratchet;
-            break;
+			break;
+
+			case MenuType.Events:
+				if (events == null) {
+					events = new EventListPage();
+				}
+
+				PageSelection = events;
+			break;
         }
       };
 

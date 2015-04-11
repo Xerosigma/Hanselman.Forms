@@ -57,7 +57,15 @@ namespace Hanselman.Portable
         Title = "This Developer's Life",
         MenuType = MenuType.DeveloperLife,
         Icon = "tdl.png"
-      });
+				});
+
+		MenuItems.Add(new HomeMenuItem
+		{
+			Id = 6,
+			Title = "Events",
+			MenuType = MenuType.Events,
+			Icon = "about.png"
+		});
     }
 
   }
