@@ -1,58 +1,110 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Hanselman.Portable.Views.EventListPage"
-             xmlns:controls="clr-namespace:Hanselman.Portable.Helpers;assembly=Hanselman.Portable"
-             Title="{Binding Name}" Icon="{Binding Icon}"  IsBusy="{Binding IsBusy}">
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="Hanselman.Portable.Views.EventListPage"
+	xmlns:controls="clr-namespace:Hanselman.Portable.Helpers;assembly=Hanselman.Portable"
+	Title="{Binding Title}" Icon="{Binding Icon}"  IsBusy="{Binding IsBusy}">
 
-  <StackLayout Orientation="Vertical">
+  <StackLayout Orientation="Vertical" Padding="10" BackgroundColor="#ffbbdefb">
+    
+    <Entry Placeholder="Search... try typing 'party'" TextColor="#757575"/>
+
+    <Grid Padding="10,5">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+    <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Nearby" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap">
+        	<Label.GestureRecognizers>
+        		<TapGestureRecognizer Command="{Binding FilterCommand}"/>
+        	</Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
+
+    <StackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Friends" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap">
+        	<Label.GestureRecognizers>
+        		<TapGestureRecognizer Command="{Binding FilterCommand}"/>
+        	</Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
+
+    <StackLayout Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Other Filters" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap">
+        	<Label.GestureRecognizers>
+        		<TapGestureRecognizer Command="{Binding FilterCommand}"/>
+        	</Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
+  </Grid>
 
     <ListView x:Name="listView"
               ItemsSource="{Binding Events}"
+              SelectedItem="{Binding SelectedItem}"
+    		  SeparatorVisibility="Default"
+    		  SeparatorColor="#ffbbdefb"
               HasUnevenRows="True"
               IsPullToRefreshEnabled="True"
               RefreshCommand="{Binding LoadEventsCommand}"
-              IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              BackgroundColor="#ffffffff">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <Grid Padding="10,5">
+            <Grid ColumnSpacing="0" RowSpacing="0">
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
 
-              <!--
-              <controls:CircleImage Source="{Binding Image}" VerticalOptions="Start">
-                <controls:CircleImage.WidthRequest>
-                  <OnPlatform x:TypeArguments="x:Double">
-                    <OnPlatform.iOS>55</OnPlatform.iOS>
-                    <OnPlatform.Android>55 </OnPlatform.Android>
-                    <OnPlatform.WinPhone>75</OnPlatform.WinPhone>
-                  </OnPlatform>
-                 </controls:CircleImage.WidthRequest>
-              <controls:CircleImage.HeightRequest>
-                  <OnPlatform x:TypeArguments="x:Double">
-                    <OnPlatform.iOS>55</OnPlatform.iOS>
-                    <OnPlatform.Android>55</OnPlatform.Android>
-                    <OnPlatform.WinPhone>75</OnPlatform.WinPhone>
-                  </OnPlatform>
-                 </controls:CircleImage.HeightRequest>
-              </controls:CircleImage>
-              -->
+            <!-- Pseudo item gap -->
+			<StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
+                <Label Text="" FontSize="Micro" BackgroundColor="#ffbbdefb"/>
+            </StackLayout>
 
-              <StackLayout Grid.Column="1" 
-                           Padding="8" 
-                           Spacing="4"
-                           VerticalOptions="Center">
-                <Label Text="{Binding Name}" FontSize="Medium"  TextColor="#3498DB" LineBreakMode="NoWrap"/>
+			<StackLayout Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
+                <Label Text="" FontSize="Micro" BackgroundColor="#ffbbdefb"/>
+            </StackLayout>
+			<!-- End of Gap -->
+
+            <StackLayout Grid.Column="1" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,-6">
+                <Label Text="{Binding Name}" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold"/>
+                <Label Text="'{@PlaceName}'" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap"/>
                 <!---<Label Text="{Binding FriendsGoing}" x:Name="TweetText" FontSize="Small" LineBreakMode="WordWrap"/>-->
-              </StackLayout>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End" Padding="12,-6">
+                <Label Text="{Binding Name}" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap"/>
+                <Label Text="'{Cost}'" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap" XAlign="End"/>
+            </StackLayout>
+
+			<StackLayout Grid.Column="1" Grid.Row="3" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,0,12,16">
+                <Label Text="DISMISS" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+			    	<Label.GestureRecognizers>
+			    		<TapGestureRecognizer Command="{Binding MaybeCommand}"/>
+			    	</Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+			<StackLayout Grid.Column="2" Grid.Row="3" VerticalOptions="Start" HorizontalOptions="End" Padding="12,0,12,16">
+                <Label BindingContext="{x:Reference listView}" Text="MAYBE" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+			    	<Label.GestureRecognizers>
+			    		<TapGestureRecognizer 
+			    		Command="{Binding Path=BindingContext.FilterCommand, Source={controls:ElementSource listView}}"/>
+			    	</Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
             </Grid>
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
+
+    <!-- NOTE: Decent spot for a footer -->
 
   </StackLayout>
 </ContentPage>

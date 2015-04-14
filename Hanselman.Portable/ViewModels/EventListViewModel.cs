@@ -13,6 +13,9 @@ namespace Hanselman.Portable
 
 		public ObservableCollection<Event> Events { get; set; }
 
+		public object SelectedItem { get; set; }
+
+
 		public EventListViewModel()
 		{
 			Title = "Events";
@@ -20,6 +23,76 @@ namespace Hanselman.Portable
 			Events = new ObservableCollection<Event>();
 
 		}
+
+		// TODO: Move to partial "FilterCommand"
+		#region FilterCommand
+		private Command filterCommand;
+		public Command FilterCommand
+		{
+			get
+			{
+				return filterCommand ??
+					(filterCommand = new Command(() => { ExecuteFilterCommand(); }, () =>
+						{
+							return !IsBusy;
+						}));
+			}
+		}
+		public async Task ExecuteFilterCommand()
+		{
+			if (IsBusy) { return; }
+
+			IsBusy = true;
+			FilterCommand.ChangeCanExecute();
+			try
+			{
+				var page = new ContentPage();
+				page.DisplayAlert("Filter", "You're filtering.", "Awesome");
+			}
+			catch (Exception ex)
+			{
+				var page = new ContentPage();
+				page.DisplayAlert("Error", "Unable to filter.", "OK");
+			}
+
+			IsBusy = false;
+			FilterCommand.ChangeCanExecute();
+		}
+		#endregion
+		public void Test() { new ContentPage().DisplayAlert("????", "???", "???"); }
+		private Command maybeCommand;
+		public Command MaybeCommand
+		{
+			get
+			{
+				return maybeCommand ??
+					(maybeCommand = new Command((args) => { ExecuteMaybeCommand(args); }, (args) =>
+						{
+							return !IsBusy;
+						}));
+			}
+		}
+		public async Task ExecuteMaybeCommand(object obj)
+		{
+			if (IsBusy) { return; }
+
+			IsBusy = true;
+			MaybeCommand.ChangeCanExecute();
+			try
+			{
+				var page = new ContentPage();
+				page.DisplayAlert("Click", "Moving to maybe???", "Maybe");
+			}
+			catch (Exception ex)
+			{
+				var page = new ContentPage();
+				page.DisplayAlert("Error", "Unable to execute onClick()", "OK");
+			}
+
+			IsBusy = false;
+			MaybeCommand.ChangeCanExecute();
+		}
+
 
 		private Command loadEventsCommand;
 
