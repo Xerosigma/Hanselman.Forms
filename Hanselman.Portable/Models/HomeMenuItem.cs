@@ -5,18 +5,13 @@ namespace Hanselman.Portable
 	public enum MenuType
 	{
 		Events,
-		About,
-		Blog,
-		Twitter,
-    Hanselminutes,
-    Ratchet,
-    DeveloperLife
+		CreateEvent,
 	}
 	public class HomeMenuItem : BaseModel
 	{
 		public HomeMenuItem ()
 		{
-			MenuType = MenuType.About;
+			MenuType = MenuType.Events;
 		}
 		public string Icon {get;set;}
 		public MenuType MenuType { get; set; }

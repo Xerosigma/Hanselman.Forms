@@ -83,6 +83,7 @@
     <Compile Include="Views\EventListPage.xaml.cs">
       <DependentUpon>EventListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ElementSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqToTwitterPcl">

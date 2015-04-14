@@ -28,7 +28,7 @@ namespace Hanselman.Portable
       };
       Detail = homeNav;
 
-      pages.Add(MenuType.About, homeNav);
+			pages.Add(MenuType.Events, homeNav);
 
       master.PageSelectionChanged = async (menuType) =>
       {
@@ -67,7 +67,7 @@ namespace Hanselman.Portable
   {
     public Action<MenuType> PageSelectionChanged;
     private Page pageSelection;
-    private MenuType menuType = MenuType.About;
+		private MenuType menuType = MenuType.Events;
     public Page PageSelection
     {
       get { return pageSelection; }
@@ -132,42 +132,6 @@ namespace Hanselman.Portable
         menuType = menuItem.MenuType;
         switch (menuItem.MenuType)
         {
-          case MenuType.About:
-            if (about == null)
-              about = new AboutPage();
-
-            PageSelection = about;
-            break;
-          case MenuType.Blog:
-            if (blog == null)
-              blog = new BlogPage();
-
-            PageSelection = blog;
-            break;
-          case MenuType.Twitter:
-            if (twitter == null)
-              twitter = new TwitterPage();
-
-            PageSelection = twitter;
-            break;
-          case MenuType.DeveloperLife:
-            if (developerlife == null)
-              developerlife = new PodcastPage(menuItem);
-
-            PageSelection = developerlife;
-            break;
-          case MenuType.Hanselminutes:
-            if (hanselminutes == null)
-              hanselminutes = new PodcastPage(menuItem);
-
-            PageSelection = hanselminutes;
-            break;
-          case MenuType.Ratchet:
-            if (ratchet == null)
-              ratchet = new PodcastPage(menuItem);
-
-            PageSelection = ratchet;
-			break;
 
 			case MenuType.Events:
 				if (events == null) {
@@ -175,7 +139,15 @@ namespace Hanselman.Portable
 				}
 
 				PageSelection = events;
-			break;
+					break;
+
+				case MenuType.CreateEvent:
+					if (events == null) {
+						events = new EventListPage();
+					}
+
+					PageSelection = events;
+					break;
         }
       };
 

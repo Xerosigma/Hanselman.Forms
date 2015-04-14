@@ -21,15 +21,6 @@ namespace Hanselman.Portable.ViewModels
 
       switch(item.MenuType)
       {
-        case MenuType.Hanselminutes:
-          image = "hm_full.jpg";
-          break;
-        case MenuType.Ratchet:
-          image = "ratchet_full.jpg";
-          break;
-        case MenuType.DeveloperLife:
-          image = "tdl_full.jpg";
-          break;
       }
     }
 
@@ -82,15 +73,6 @@ namespace Hanselman.Portable.ViewModels
 
         switch(item.MenuType)
         {
-          case MenuType.Hanselminutes:
-            feed =  "http://feeds.podtrac.com/9dPm65vdpLL1";
-            break;
-          case MenuType.Ratchet:
-            feed = "http://feeds.feedburner.com/RatchetAndTheGeek?format=xml";
-            break;
-          case MenuType.DeveloperLife:
-            feed = "http://feeds.feedburner.com/ThisDevelopersLife?format=xml";
-            break;
         }
         var responseString = await httpClient.GetStringAsync(feed);
 
