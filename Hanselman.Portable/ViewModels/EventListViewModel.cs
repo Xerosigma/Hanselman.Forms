@@ -21,7 +21,6 @@ namespace Hanselman.Portable
 			Title = "Events";
 			Icon = "slideout.png";
 			Events = new ObservableCollection<Event>();
-
 		}
 
 		// TODO: Move to partial "FilterCommand"
@@ -31,14 +30,14 @@ namespace Hanselman.Portable
 		{
 			get
 			{
-				return filterCommand ??
-					(filterCommand = new Command(() => { ExecuteFilterCommand(); }, () =>
-						{
-							return !IsBusy;
+				return filterCommand ?? 
+					(filterCommand = new Command((args) => { ExecuteFilterCommand(args); }, (args) => 
+						{ 
+							return !IsBusy; 
 						}));
 			}
 		}
-		public async Task ExecuteFilterCommand()
+		public async Task ExecuteFilterCommand(object filterObj)
 		{
 			if (IsBusy) { return; }
 
@@ -46,8 +45,9 @@ namespace Hanselman.Portable
 			FilterCommand.ChangeCanExecute();
 			try
 			{
+				string filterTag = ((Label) filterObj).Text;
 				var page = new ContentPage();
-				page.DisplayAlert("Filter", "You're filtering.", "Awesome");
+				page.DisplayAlert("Filter", string.Format("You're filtering on {0}", filterTag), "Awesome");
 			}
 			catch (Exception ex)
 			{
@@ -59,38 +59,38 @@ namespace Hanselman.Portable
 			FilterCommand.ChangeCanExecute();
 		}
 		#endregion
-		public void Test() { new ContentPage().DisplayAlert("????", "???", "???"); }
-		private Command maybeCommand;
-		public Command MaybeCommand
+
+		private Command itemActionCommand;
+		public Command ItemActionCommand
 		{
 			get
 			{
-				return maybeCommand ??
-					(maybeCommand = new Command((args) => { ExecuteMaybeCommand(args); }, (args) =>
+				return itemActionCommand ??
+					(itemActionCommand = new Command((args) => { ExecuteItemActionCommand(args as Event); }, (args) =>
 						{
 							return !IsBusy;
 						}));
 			}
 		}
-		public async Task ExecuteMaybeCommand(object obj)
+		public async Task ExecuteItemActionCommand(Event eventObj)
 		{
 			if (IsBusy) { return; }
 
 			IsBusy = true;
-			MaybeCommand.ChangeCanExecute();
+			ItemActionCommand.ChangeCanExecute();
 			try
 			{
+				//string actionTag = ((Label) action).Text;
 				var page = new ContentPage();
-				page.DisplayAlert("Click", "Moving to maybe???", "Maybe");
+				page.DisplayAlert(eventObj.Name, string.Format("{0}", eventObj.Name), eventObj.Name);
 			}
 			catch (Exception ex)
 			{
-				var page = new ContentPage();
-				page.DisplayAlert("Error", "Unable to execute onClick()", "OK");
+				new ContentPage().DisplayAlert("Error", "Unable to execute onClick()", "OK");
 			}
 
 			IsBusy = false;
-			MaybeCommand.ChangeCanExecute();
+			ItemActionCommand.ChangeCanExecute();
 		}
 
 
