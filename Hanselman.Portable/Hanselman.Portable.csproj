@@ -84,6 +84,9 @@
       <DependentUpon>EventListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ElementSource.cs" />
+    <Compile Include="Views\Modules\SnackbarView.xaml.cs">
+      <DependentUpon>SnackbarView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqToTwitterPcl">
@@ -131,6 +134,9 @@
     <EmbeddedResource Include="Views\EventListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Modules\SnackbarView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\TwitterPage.xaml">
@@ -175,4 +181,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Views\Modules\" />
+  </ItemGroup>
 </Project>

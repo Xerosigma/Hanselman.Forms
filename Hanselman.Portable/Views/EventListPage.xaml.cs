@@ -25,9 +25,10 @@ namespace Hanselman.Portable.Views
 			{
 				if(listView.SelectedItem == null) { return;}
 				//DisplayAlert("Hooray", "You selected an item.", "Cool!");
-				ShowSnack("Hooray", null);
+                Event eevent = args as Event;
+                ShowSnack(eevent.Name, null);
 
-				// TODO: Render details page.
+				// TODO: Render event details page.
 			};
 		}
 
@@ -42,26 +43,25 @@ namespace Hanselman.Portable.Views
 			}
 
 			ViewModel.LoadEventsCommand.Execute(null);
-
-			StackLayout sl = Content.FindByName<StackLayout>("snackbarLayout");
-			sl.IsVisible = false;
 		}
 
-		private async Task ShowSnack(string message, Delegate action)
+        private async Task ShowSnack(string message, Action<object> action)
 		{
-			StackLayout sl = Content.FindByName<StackLayout>("snackbarLayout");
-			Label text = sl.FindByName<Label>("snackbarText");
-			Label actionText = sl.FindByName<Label>("snackbarActionText");
+            ContentView snackbarView = Content.FindByName<ContentView>("snackbarView");
+            StackLayout sl = snackbarView.Content.FindByName<StackLayout>("snackbarLayout");
+			Label messageLabel = sl.FindByName<Label>("snackbarText");
+			Label actionLabel = sl.FindByName<Label>("snackbarActionText");
 
-			text.Text = message;
+            messageLabel.Text = message;
 
-			sl.Opacity = 0;
-			sl.IsVisible = true;
-			sl.FadeTo(1,500);
+            snackbarView.Opacity = 0;
+            snackbarView.IsVisible = true;
+            await snackbarView.FadeTo(1,375);
 
 			await Task.Delay(3500);
-			await sl.FadeTo(0,125);
-			sl.IsVisible = false;
+            await snackbarView.FadeTo(0,125);
+
+            snackbarView.IsVisible = false;
 		}
 	}
 }

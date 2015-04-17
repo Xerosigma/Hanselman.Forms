@@ -10,8 +10,9 @@ namespace Hanselman.Portable
 {
 	public class EventListViewModel : BaseViewModel
 	{
-
-		public ObservableCollection<Event> Events { get; set; }
+        public ObservableCollection<Event> Events { get; set; }
+        public ObservableCollection<Event> DismissedEvents { get; set; }
+        public ObservableCollection<Event> TentativeEvents { get; set; }
 
 		public object SelectedItem { get; set; }
 
@@ -20,7 +21,9 @@ namespace Hanselman.Portable
 		{
 			Title = "Events";
 			Icon = "slideout.png";
-			Events = new ObservableCollection<Event>();
+            Events = new ObservableCollection<Event>();
+            DismissedEvents = new ObservableCollection<Event>();
+            TentativeEvents = new ObservableCollection<Event>();
 		}
 
 		// TODO: Move to partial "FilterCommand"
@@ -60,42 +63,74 @@ namespace Hanselman.Portable
 		}
 		#endregion
 
-		private Command itemActionCommand;
-		public Command ItemActionCommand
+        private Command dismissCommand;
+        public Command DismissCommand
 		{
 			get
 			{
-				return itemActionCommand ??
-					(itemActionCommand = new Command((args) => { ExecuteItemActionCommand(args as Event); }, (args) =>
+                return dismissCommand ??
+                    (dismissCommand = new Command((args) => { ExecuteDismissCommand(args as Event); }, (args) =>
 						{
 							return !IsBusy;
 						}));
 			}
 		}
-		public async Task ExecuteItemActionCommand(Event eventObj)
+        public async Task ExecuteDismissCommand(Event eventObj)
 		{
 			if (IsBusy) { return; }
 
 			IsBusy = true;
-			ItemActionCommand.ChangeCanExecute();
+            DismissCommand.ChangeCanExecute();
 			try
 			{
-				//string actionTag = ((Label) action).Text;
-				var page = new ContentPage();
-				page.DisplayAlert(eventObj.Name, string.Format("{0}", eventObj.Name), eventObj.Name);
+                // TODO: Display dismiss snack, pass UNDO action.
+                Events.Remove(eventObj);
+                DismissedEvents.Add(eventObj);
 			}
 			catch (Exception ex)
 			{
-				new ContentPage().DisplayAlert("Error", "Unable to execute onClick()", "OK");
+                new ContentPage().DisplayAlert("Error", "Unable to dismiss event.", "OK");
 			}
 
 			IsBusy = false;
-			ItemActionCommand.ChangeCanExecute();
-		}
+            DismissCommand.ChangeCanExecute();
+        }
+
+        private Command tentativeCommand;
+        public Command TentativeCommand
+        {
+            get
+            {
+                return tentativeCommand ??
+                    (tentativeCommand = new Command((args) => { ExecuteTentativeCommand(args as Event); }, (args) =>
+                        {
+                            return !IsBusy;
+                        }));
+            }
+        }
+        public async Task ExecuteTentativeCommand(Event eventObj)
+        {
+            if (IsBusy) { return; }
+
+            IsBusy = true;
+            TentativeCommand.ChangeCanExecute();
+            try
+            {
+                // TODO: Display tentative snack, pass UNDO action.
+                Events.Remove(eventObj);
+                TentativeEvents.Add(eventObj);
+            }
+            catch (Exception ex)
+            {
+                new ContentPage().DisplayAlert("Error", "Unable to set event.", "OK");
+            }
+
+            IsBusy = false;
+            TentativeCommand.ChangeCanExecute();
+        }
 
 
 		private Command loadEventsCommand;
-
 		public Command LoadEventsCommand
 		{
 			get
