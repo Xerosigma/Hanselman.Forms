@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using LinqToTwitter;
 using System.Threading.Tasks;
 using System.Linq;
+using Hanselman.Portable.Helpers;
 
 namespace Hanselman.Portable
 {
@@ -14,7 +15,7 @@ namespace Hanselman.Portable
         public ObservableCollection<Event> DismissedEvents { get; set; }
         public ObservableCollection<Event> TentativeEvents { get; set; }
 
-		public object SelectedItem { get; set; }
+        public Renderer Renderer { get; set; }
 
 
 		public EventListViewModel()
@@ -61,7 +62,7 @@ namespace Hanselman.Portable
 			IsBusy = false;
 			FilterCommand.ChangeCanExecute();
 		}
-		#endregion
+        #endregion
 
         private Command dismissCommand;
         public Command DismissCommand
@@ -69,13 +70,13 @@ namespace Hanselman.Portable
 			get
 			{
                 return dismissCommand ??
-                    (dismissCommand = new Command((args) => { ExecuteDismissCommand(args as Event); }, (args) =>
+                    (dismissCommand = new Command((args) => { ExecuteDismissCommand(args); }, (args) =>
 						{
 							return !IsBusy;
 						}));
 			}
 		}
-        public async Task ExecuteDismissCommand(Event eventObj)
+        public async Task ExecuteDismissCommand(object obj)
 		{
 			if (IsBusy) { return; }
 
@@ -83,9 +84,17 @@ namespace Hanselman.Portable
             DismissCommand.ChangeCanExecute();
 			try
 			{
-                // TODO: Display dismiss snack, pass UNDO action.
+                Event eventObj = obj as Event;
+
                 Events.Remove(eventObj);
                 DismissedEvents.Add(eventObj);
+
+                Renderer.ShowSnack(string.Format("Dismissed {0}", eventObj.Name),
+                    new Command(() => {
+                    new ContentPage().DisplayAlert("Cmd","","");
+                    DismissedEvents.Remove(eventObj);
+                    Events.Add(eventObj);
+                }));
 			}
 			catch (Exception ex)
 			{
@@ -129,7 +138,6 @@ namespace Hanselman.Portable
             TentativeCommand.ChangeCanExecute();
         }
 
-
 		private Command loadEventsCommand;
 		public Command LoadEventsCommand
 		{
@@ -142,7 +150,6 @@ namespace Hanselman.Portable
 						}));
 			}
 		}
-
 		public async Task ExecuteLoadEventsCommand()
 		{
 			if (IsBusy)

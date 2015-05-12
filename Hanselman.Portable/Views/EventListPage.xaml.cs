@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Hanselman.Portable.Helpers;
 
 namespace Hanselman.Portable.Views
 {
-	public partial class EventListPage : ContentPage
+    public partial class EventListPage : ContentPage, Renderer
 	{
 		private EventListViewModel ViewModel
 		{
@@ -21,16 +22,24 @@ namespace Hanselman.Portable.Views
 
 			BindingContext = new EventListViewModel();
 
+            ViewModel.Renderer = this;
+
+            //await DisplayAlert("Filter","","");
 			listView.ItemTapped += (sender, args) =>
 			{
-				if(listView.SelectedItem == null) { return;}
-				//DisplayAlert("Hooray", "You selected an item.", "Cool!");
-                Event eevent = args as Event;
-                ShowSnack(eevent.Name, null);
+				if(listView.SelectedItem == null) { return; }
+                Event eevent = args.Item as Event;
+                SnackbarView.ShowSnack(Content, eevent.Name, null);
+                //DialogView.ShowDialog(Content, eevent.Name, null);
 
 				// TODO: Render event details page.
 			};
 		}
+
+        public void ShowSnack(string message, Command command)
+        {
+            SnackbarView.ShowSnack(Content, message, command);
+        }
 
 
 		protected override void OnAppearing()
@@ -43,25 +52,6 @@ namespace Hanselman.Portable.Views
 			}
 
 			ViewModel.LoadEventsCommand.Execute(null);
-		}
-
-        private async Task ShowSnack(string message, Action<object> action)
-		{
-            ContentView snackbarView = Content.FindByName<ContentView>("snackbarView");
-            StackLayout sl = snackbarView.Content.FindByName<StackLayout>("snackbarLayout");
-			Label messageLabel = sl.FindByName<Label>("snackbarText");
-			Label actionLabel = sl.FindByName<Label>("snackbarActionText");
-
-            messageLabel.Text = message;
-
-            snackbarView.Opacity = 0;
-            snackbarView.IsVisible = true;
-            await snackbarView.FadeTo(1,375);
-
-			await Task.Delay(3500);
-            await snackbarView.FadeTo(0,125);
-
-            snackbarView.IsVisible = false;
 		}
 	}
 }

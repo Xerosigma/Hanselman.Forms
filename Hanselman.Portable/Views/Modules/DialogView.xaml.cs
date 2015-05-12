@@ -5,25 +5,23 @@ using Xamarin.Forms;
 
 namespace Hanselman.Portable.Helpers
 {
-    public partial class SnackbarView : ContentView
+    public partial class DialogView : ContentView
     {
-        public SnackbarView ()
+        public DialogView ()
         {
             InitializeComponent ();
         }
 
-        public static async Task ShowSnack(View content, string message, Command command)
+        public static async Task ShowDialog(View content, string message, Action<object> action)
         {
-            ContentView snackbarView = content.FindByName<ContentView>("snackbarView");
-            StackLayout sl = snackbarView.Content.FindByName<StackLayout>("snackbarLayout");
+            ContentView snackbarView = content.FindByName<ContentView>("dialogView");
+            // TODO: Make dialog.
+            /*
+            StackLayout sl = snackbarView.Content.FindByName<StackLayout>("dialogLayout");
             Label messageLabel = sl.FindByName<Label>("snackbarText");
             Label actionLabel = sl.FindByName<Label>("snackbarActionText");
 
-            if(command != null) {
-                actionLabel.GestureRecognizers.Add(new TapGestureRecognizer(){Command = command});
-            }
-
-            messageLabel.Text = message;
+            messageLabel.Text = message;*/
 
             snackbarView.Opacity = 0;
             snackbarView.IsVisible = true;
