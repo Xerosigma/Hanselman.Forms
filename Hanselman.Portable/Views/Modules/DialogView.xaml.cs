@@ -10,6 +10,16 @@ namespace Hanselman.Portable.Helpers
         public DialogView ()
         {
             InitializeComponent ();
+
+            RelativeLayout relativeLayout = Content.FindByName<RelativeLayout>("dialogLayout");
+            View layout = Content.FindByName<View>("dialogStackLayout");
+
+            relativeLayout.Children.Add(layout,
+                Constraint.RelativeToParent(parent => (parent.Width/2) - (layout.Width/2)),
+                Constraint.RelativeToParent(parent => (parent.Height/2) - (layout.Height/2)),
+                Constraint.RelativeToParent(parent => parent.Width / 1.2),
+                null
+            );
         }
 
         public static async Task ShowDialog(View content, string message, Action<object> action)

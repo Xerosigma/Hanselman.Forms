@@ -22,6 +22,7 @@ namespace Hanselman.Portable.Views
 
 			BindingContext = new EventListViewModel();
 
+            // TODO: Move to a base class?
             ViewModel.Renderer = this;
 
             //await DisplayAlert("Filter","","");
@@ -29,8 +30,7 @@ namespace Hanselman.Portable.Views
 			{
 				if(listView.SelectedItem == null) { return; }
                 Event eevent = args.Item as Event;
-                SnackbarView.ShowSnack(Content, eevent.Name, null);
-                //DialogView.ShowDialog(Content, eevent.Name, null);
+                DialogView.ShowDialog(Content, eevent.Name, null);
 
 				// TODO: Render event details page.
 			};

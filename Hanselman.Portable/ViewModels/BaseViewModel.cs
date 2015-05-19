@@ -2,10 +2,20 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 
+using Hanselman.Portable.Helpers;
+
 namespace Hanselman.Portable
 {
 	public class BaseViewModel : INotifyPropertyChanged
-	{
+    {
+        /// <summary>
+        /// Gets or sets the view renderer that enables
+        /// the ViewModel to call to a view that can handle
+        /// UI related actions.
+        /// </summary>
+        /// <value>The renderer.</value>
+        public Renderer Renderer { get; set; }
+
 		public BaseViewModel ()
 		{
 		}

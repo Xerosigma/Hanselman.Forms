@@ -6,7 +6,7 @@
 	xmlns:controls="clr-namespace:Hanselman.Portable.Helpers;assembly=Hanselman.Portable"
 	Title="{Binding Title}" Icon="{Binding Icon}"  IsBusy="{Binding IsBusy}">
 
-	<StackLayout x:Name="contentLayout" BackgroundColor="#ffbbdefb">
+	<RelativeLayout x:Name="contentLayout" BackgroundColor="#ffbbdefb">
 
   <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Padding="10">
     
@@ -56,34 +56,34 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid ColumnSpacing="0" RowSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
               <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.70*"/>
+                <ColumnDefinition Width="0.30*"/>
               </Grid.ColumnDefinitions>
 
             <!-- Pseudo item gap -->
-			<StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
+			<StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Start">
                 <Label Text="" FontSize="Micro" BackgroundColor="#ffbbdefb"/>
             </StackLayout>
 
-			<StackLayout Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
+			<StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
                 <Label Text="" FontSize="Micro" BackgroundColor="#ffbbdefb"/>
             </StackLayout>
 			<!-- End of Gap -->
 
-            <StackLayout Grid.Column="1" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,-6">
+            <StackLayout Grid.Column="0" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,-6">
                 <Label Text="{Binding Name}" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold"/>
                 <Label Text="'{@PlaceName}'" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap"/>
                 <!---<Label Text="{Binding FriendsGoing}" x:Name="TweetText" FontSize="Small" LineBreakMode="WordWrap"/>-->
             </StackLayout>
 
-            <StackLayout Grid.Column="2" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End" Padding="12,-6">
+            <StackLayout Grid.Column="1" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="End" Padding="12,-6">
                 <Label Text="{Binding Name}" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap"/>
                 <Label Text="'{Cost}'" FontSize="Micro" TextColor="#ff1976d2" LineBreakMode="NoWrap" XAlign="End"/>
             </StackLayout>
 
-			<StackLayout Grid.Column="1" Grid.Row="3" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,0,12,16">
+			<StackLayout Grid.Column="0" Grid.Row="3" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,0,12,16">
                 <Label x:Name="dismiss" Text="DISMISS" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
 			    	<Label.GestureRecognizers>
 			    		<TapGestureRecognizer
@@ -96,7 +96,7 @@
             <!-- Binding Reference -->
             <!--- <Label x:Name="tentative" BindingContext="{x:Reference listView}"/> -->
 
-			<StackLayout Grid.Column="2" Grid.Row="3" VerticalOptions="Start" HorizontalOptions="End" Padding="12,0,12,16">
+			<StackLayout Grid.Column="1" Grid.Row="3" VerticalOptions="Start" HorizontalOptions="End" Padding="12,0,12,16">
                 <Label x:Name="tentative" Text="MAYBE" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
 			    	<Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding FilterCommand}" CommandParameter="{x:Reference tentative}" />
@@ -114,10 +114,9 @@
     <!-- NOTE: Decent spot for a footer -->
     </StackLayout>
 
-  <!-- TODO: Find way to make modular -->
   <controls:SnackbarView x:Name="snackbarView" IsVisible="false"/>
 
   <controls:DialogView x:Name="dialogView" IsVisible="false"/>
 
-  </StackLayout>
+  </RelativeLayout>
 </ContentPage>

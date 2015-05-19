@@ -5,13 +5,57 @@
     x:Class="Hanselman.Portable.Helpers.DialogView">
     <ContentView.Content>
 
-        <RelativeLayout
-                WidthRequest="1000"
-                HeightRequest="1000"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill"
-                BackgroundColor="#66000000">
+        <RelativeLayout x:Name="dialogLayout" BackgroundColor="#66000000">
+
+        <StackLayout x:Name="dialogStackLayout" Orientation="Vertical" BackgroundColor="#ffffffff">
+
+            <Grid Padding="10,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout x:Name="snackbarTitleLayout" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start">
+                    <Label x:Name="snackbarTitle" Text="Title" FontSize="Small" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DismissSnack}" CommandParameter="{x:Reference snackbarLayout}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout x:Name="snackbarMessageLayout" Grid.Row="2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start">
+                    <Label x:Name="snackbarMessage" Text="Message" FontSize="Small" TextColor="#ff222222" LineBreakMode="WordWrap">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DismissSnack}" CommandParameter="{x:Reference snackbarLayout}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout x:Name="snackbarTextLayout" Grid.Row="3" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End">
+                    <Label x:Name="snackbarText" Text="OK" FontSize="Small" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DismissSnack}" CommandParameter="{x:Reference snackbarLayout}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout x:Name="snackbarActionTextLayout" Grid.Row="3" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
+                    <Label x:Name="snackbarActionText" Text="Cancel" FontSize="Small" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UndoSnack}" CommandParameter="{x:Reference snackbarLayout}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
 
         </RelativeLayout>
+
     </ContentView.Content>
 </ContentView>

@@ -15,8 +15,6 @@ namespace Hanselman.Portable
         public ObservableCollection<Event> DismissedEvents { get; set; }
         public ObservableCollection<Event> TentativeEvents { get; set; }
 
-        public Renderer Renderer { get; set; }
-
 
 		public EventListViewModel()
 		{
@@ -91,9 +89,9 @@ namespace Hanselman.Portable
 
                 Renderer.ShowSnack(string.Format("Dismissed {0}", eventObj.Name),
                     new Command(() => {
-                    new ContentPage().DisplayAlert("Cmd","","");
                     DismissedEvents.Remove(eventObj);
                     Events.Add(eventObj);
+                    Renderer.ShowSnack("Action reverted.", null);
                 }));
 			}
 			catch (Exception ex)
