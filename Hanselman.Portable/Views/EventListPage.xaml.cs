@@ -30,9 +30,7 @@ namespace Hanselman.Portable.Views
 			{
 				if(listView.SelectedItem == null) { return; }
                 Event eevent = args.Item as Event;
-                DialogView.ShowDialog(Content, eevent.Name, null);
-
-				// TODO: Render event details page.
+				this.Navigation.PushAsync(new EventDetailsPage(eevent));
 			};
 		}
 

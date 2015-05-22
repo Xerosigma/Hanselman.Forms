@@ -109,23 +109,31 @@ namespace Hanselman.Portable
             get
             {
                 return tentativeCommand ??
-                    (tentativeCommand = new Command((args) => { ExecuteTentativeCommand(args as Event); }, (args) =>
+                    (tentativeCommand = new Command((args) => { ExecuteTentativeCommand(args); }, (args) =>
                         {
                             return !IsBusy;
                         }));
             }
         }
-        public async Task ExecuteTentativeCommand(Event eventObj)
+		public async Task ExecuteTentativeCommand(object obj)
         {
             if (IsBusy) { return; }
 
             IsBusy = true;
             TentativeCommand.ChangeCanExecute();
             try
-            {
-                // TODO: Display tentative snack, pass UNDO action.
-                Events.Remove(eventObj);
-                TentativeEvents.Add(eventObj);
+			{
+				Event eventObj = obj as Event;
+
+				Events.Remove(eventObj);
+				TentativeEvents.Add(eventObj);
+
+				Renderer.ShowSnack(string.Format("Maybe {0}", eventObj.Name),
+					new Command(() => {
+						TentativeEvents.Remove(eventObj);
+						Events.Add(eventObj);
+						Renderer.ShowSnack("Action reverted.", null);
+					}));
             }
             catch (Exception ex)
             {
