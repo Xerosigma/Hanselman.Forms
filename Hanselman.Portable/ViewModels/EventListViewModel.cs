@@ -199,10 +199,17 @@ namespace Hanselman.Portable
 			LoadEventsCommand.ChangeCanExecute();
 			try
 			{
+				var attendees = new List<Person>();
+				attendees.Add(new Person{ Name = "Jon Snow" });
+				attendees.Add(new Person{ Name = "Walter White" });
+				attendees.Add(new Person{ Name = "Harry Dresden" });
+				attendees.Add(new Person{ Name = "Tony Stark" });
+				attendees.Add(new Person{ Name = "Nestor Ledon" });
+
 				var events = new List<Event>();
-				events.Add(new Event{ Name = "Super Awesome Party", Location = "@Divebar", FriendsGoing = 13 });
-				events.Add(new Event{ Name = "D&D", Location = "@Nestor's Place", FriendsGoing = 3 });
-				events.Add(new Event{ Name = "Pool Tournament", Location = "@BilliardsNStuff", FriendsGoing = 7 });
+				events.Add(new Event{ Name = "Super Awesome Party", Location = "@Divebar", FriendsGoing = 13, Attendees = attendees });
+				events.Add(new Event{ Name = "D&D", Location = "@Nestor's Place", FriendsGoing = 3, Attendees = attendees });
+				events.Add(new Event{ Name = "Pool Tournament", Location = "@BilliardsNStuff", FriendsGoing = 7, Attendees = attendees });
 
 				foreach (var e in events)
 				{

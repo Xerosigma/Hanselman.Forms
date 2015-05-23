@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Models\Person.cs" />
     <Compile Include="Views\Extensions\Extensions.cs" />
+    <Compile Include="Core\CollectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqToTwitterPcl">
@@ -208,5 +209,6 @@
   <ItemGroup>
     <Folder Include="Views\Modules\" />
     <Folder Include="Views\Extensions\" />
+    <Folder Include="Core\" />
   </ItemGroup>
 </Project>

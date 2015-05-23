@@ -18,8 +18,9 @@ namespace Hanselman.Portable
 		{
 			Title = "Details";
 			Icon = "slideout.png";
-			Attendees = new ObservableCollection<Person>();
 			Event = eevent;
+			Attendees = new ObservableCollection<Person>();
+			Attendees.AddRange(Event.Attendees);
 		}
 
 		private Command attendingCommand;
@@ -43,6 +44,8 @@ namespace Hanselman.Portable
 			try
 			{
 				Renderer.ShowSnack(string.Format("Going to {0}", "event"), null);
+
+				// TODO: Backend request: Update Person.
 			}
 			catch (Exception ex)
 			{
@@ -75,17 +78,8 @@ namespace Hanselman.Portable
 			LoadEventsCommand.ChangeCanExecute();
 			try
 			{
-				var attendees = new List<Person>();
-				attendees.Add(new Person{ Name = "Jon Snow" });
-				attendees.Add(new Person{ Name = "Walter White" });
-				attendees.Add(new Person{ Name = "Harry Dresden" });
-				attendees.Add(new Person{ Name = "Tony Stark" });
-				attendees.Add(new Person{ Name = "Nestor Ledon" });
-
-				foreach (var e in attendees)
-				{
-					Attendees.Add(e);
-				}
+				// TODO: Backend Call: Request Event again (full refresh), refresh all Attendies and such.
+				Renderer.ShowSnack("Refreshing event...", null);
 			}
 			catch (Exception ex)
 			{
