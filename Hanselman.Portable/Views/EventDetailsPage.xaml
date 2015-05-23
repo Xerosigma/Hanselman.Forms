@@ -17,12 +17,18 @@
 					<StackLayout>
 		                <Image x:Name="EventImage" Source="http://tinyurl.com/lc7hnty" />
 		            </StackLayout>
-
-					<StackLayout 
-						RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.25}"
-						RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}">
-		                <Label Text="{Binding Event.Name}" FontSize="Large" TextColor="#ffffffff" LineBreakMode="NoWrap" FontAttributes="Bold"/>
-	                </StackLayout>
+		            <!--
+					<StackLayout
+						RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}">-->
+	                <Label
+	                	RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}"
+	                	RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}"
+	                	x:Name="eventTitleAnchor" Text="{Binding Event.Name}" FontSize="Large" TextColor="#ffffffff" LineBreakMode="NoWrap" FontAttributes="Bold"/>
+	                <Label
+	                	RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=eventTitleAnchor, Property=Width, Factor=0.50}"
+	                	RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}"
+	                	Text="{Binding Event.Name}" FontSize="Large" TextColor="#ffff00ff" LineBreakMode="NoWrap" FontAttributes="Bold"/>
+	                <!---</StackLayout>-->
 
 	            </RelativeLayout>
             </StackLayout>

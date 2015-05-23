@@ -24,9 +24,14 @@ namespace Hanselman.Portable.Views
 
 			// TODO: Move to a base class?
 			ViewModel.Renderer = this;
-			//Image image = Content.FindByName<Image> ("EventImage");
-			//image.Source = "http://tinyurl.com/lc7hnty";
 
+			listView.ItemTapped += (sender, args) =>
+			{
+				if(listView.SelectedItem == null) { return; }
+				Person person = args.Item as Person;
+				ShowSnack("TODO: Attendee Details.", null);
+				//this.Navigation.PushAsync(new EventDetailsPage(eevent));
+			};
 		}
 
 		public void ShowSnack(string message, Command command)
