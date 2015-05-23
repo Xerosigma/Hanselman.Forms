@@ -10,7 +10,9 @@
 
   <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Padding="10">
     
-    <Entry Placeholder="Search... try typing 'party'" TextColor="#757575"/>
+    <Entry x:Name="searchEntry" Placeholder="Search... try typing 'party'" TextColor="#757575"/>
+
+    <Button x:Name="searchButton" IsVisible="false" Command="{Binding SearchCommand}"/>
 
     <Grid Padding="10,5">
       <Grid.ColumnDefinitions>

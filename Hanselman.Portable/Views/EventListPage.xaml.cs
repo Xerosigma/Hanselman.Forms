@@ -32,6 +32,17 @@ namespace Hanselman.Portable.Views
                 Event eevent = args.Item as Event;
 				this.Navigation.PushAsync(new EventDetailsPage(eevent));
 			};
+
+			searchEntry.Completed += (sender, e) => 
+			{
+				string searchText = searchEntry.Text.Trim();
+				if(String.IsNullOrEmpty(searchText)) {
+					ShowSnack(string.Format("Search text is empty."), null);
+					searchEntry.Text = "";
+					return;
+				}
+				searchButton.Command.Execute(searchText);
+			};
 		}
 
         public void ShowSnack(string message, Command command)

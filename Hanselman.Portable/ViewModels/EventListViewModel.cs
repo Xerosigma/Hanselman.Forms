@@ -62,6 +62,40 @@ namespace Hanselman.Portable
 		}
         #endregion
 
+		private Command searchCommand;
+		public Command SearchCommand
+		{
+			get
+			{
+				return searchCommand ??
+					(searchCommand = new Command((args) => { ExecuteSearchCommand(args); }, (args) =>
+						{
+							return !IsBusy;
+						}));
+			}
+		}
+		public async Task ExecuteSearchCommand(object obj)
+		{
+			if (IsBusy) { return; }
+
+			IsBusy = true;
+			SearchCommand.ChangeCanExecute();
+			try
+			{
+				string searchText = obj as string;
+				Renderer.ShowSnack(string.Format("Searching for {0}", searchText), null);
+
+				// TODO: Perform search. HAL Request to backend.
+			}
+			catch (Exception ex)
+			{
+				new ContentPage().DisplayAlert("Error", "Unable to search.", "OK");
+			}
+
+			IsBusy = false;
+			SearchCommand.ChangeCanExecute();
+		}
+
         private Command dismissCommand;
         public Command DismissCommand
 		{
