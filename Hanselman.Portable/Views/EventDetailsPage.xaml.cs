@@ -28,7 +28,7 @@ namespace Hanselman.Portable.Views
 			listView.ItemTapped += (sender, args) =>
 			{
 				if(listView.SelectedItem == null) { return; }
-				Person person = args.Item as Person;
+				Attendee person = args.Item as Attendee;
 				ShowSnack("TODO: Attendee Details.", null);
 				//this.Navigation.PushAsync(new EventDetailsPage(eevent));
 			};

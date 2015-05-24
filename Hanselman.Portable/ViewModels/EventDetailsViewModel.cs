@@ -12,14 +12,14 @@ namespace Hanselman.Portable
 	public class EventDetailsViewModel : BaseViewModel
 	{
 		public Event Event { get; set; }
-		public ObservableCollection<Person> Attendees { get; set; }
+		public ObservableCollection<Attendee> Attendees { get; set; }
 
 		public EventDetailsViewModel (Event eevent)
 		{
 			Title = "Details";
 			Icon = "slideout.png";
 			Event = eevent;
-			Attendees = new ObservableCollection<Person>();
+			Attendees = new ObservableCollection<Attendee>();
 			Attendees.AddRange(Event.Attendees);
 		}
 

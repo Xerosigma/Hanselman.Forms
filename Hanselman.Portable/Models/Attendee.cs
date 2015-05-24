@@ -2,11 +2,11 @@
 
 namespace Hanselman.Portable
 {
-	public class Person
+	public class Attendee
 	{
 		public string Name { get; set; }
 
-		public Person ()
+		public Attendee ()
 		{
 		}
 	}

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using Hanselman.Portable.Helpers;
 
+using Core;
+
 namespace Hanselman.Portable
 {
 	public class EventListViewModel : BaseViewModel
@@ -199,17 +201,19 @@ namespace Hanselman.Portable
 			LoadEventsCommand.ChangeCanExecute();
 			try
 			{
-				var attendees = new List<Person>();
-				attendees.Add(new Person{ Name = "Jon Snow" });
-				attendees.Add(new Person{ Name = "Walter White" });
-				attendees.Add(new Person{ Name = "Harry Dresden" });
-				attendees.Add(new Person{ Name = "Tony Stark" });
-				attendees.Add(new Person{ Name = "Nestor Ledon" });
+				new Task(GetEvents).Start();
+
+				var attendees = new List<Attendee>();
+				attendees.Add(new Attendee{ Name = "Jon Snow" });
+				attendees.Add(new Attendee{ Name = "Walter White" });
+				attendees.Add(new Attendee{ Name = "Harry Dresden" });
+				attendees.Add(new Attendee{ Name = "Tony Stark" });
+				attendees.Add(new Attendee{ Name = "Nestor Ledon" });
 
 				var events = new List<Event>();
-				events.Add(new Event{ Name = "Super Awesome Party", Location = "@Divebar", FriendsGoing = 13, Attendees = attendees });
-				events.Add(new Event{ Name = "D&D", Location = "@Nestor's Place", FriendsGoing = 3, Attendees = attendees });
-				events.Add(new Event{ Name = "Pool Tournament", Location = "@BilliardsNStuff", FriendsGoing = 7, Attendees = attendees });
+				events.Add(new Event{ Name = "Super Awesome Party", Location = "@Divebar", Attendees = attendees });
+				events.Add(new Event{ Name = "D&D", Location = "@Nestor's Place", Attendees = attendees });
+				events.Add(new Event{ Name = "Pool Tournament", Location = "@BilliardsNStuff", Attendees = attendees });
 
 				foreach (var e in events)
 				{
@@ -224,6 +228,17 @@ namespace Hanselman.Portable
 
 			IsBusy = false;
 			LoadEventsCommand.ChangeCanExecute();
+		}
+
+		protected async void GetEvents ()
+		{
+			EventRepository repo = new EventRepository();
+			RequestResponse<Events> response = await repo.Get();
+			Events ee = response.content;
+
+			//RosterRepository repo = new RosterRepository ();
+			//RequestResponse<Roster> response = await repo.Get ();
+			//Roster roster = response.content;
 		}
 	}
 }

@@ -95,9 +95,15 @@
     <Compile Include="Views\EventDetailsPage.xaml.cs">
       <DependentUpon>EventDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Views\Extensions\Extensions.cs" />
     <Compile Include="Core\CollectionExtensions.cs" />
+    <Compile Include="Core\HTTPUtils.cs" />
+    <Compile Include="Core\ParsingUtils.cs" />
+    <Compile Include="Core\Repository.cs" />
+    <Compile Include="Core\RepositoryBase.cs" />
+    <Compile Include="Models\EventRepository.cs" />
+    <Compile Include="Models\Attendee.cs" />
+    <Compile Include="Models\Events.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqToTwitterPcl">
@@ -144,6 +150,15 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Labs">
       <HintPath>..\packages\Xamarin.Forms.Labs.1.2.0-pre3\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\Xamarin.Forms.Labs.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Portable-Net45+WinRT45+WP8+WPA81\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>..\packages\Microsoft.Bcl.Immutable.1.0.34\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="HALClient">
+      <HintPath>..\..\halclient\HALClient\bin\Debug\HALClient.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -210,5 +225,6 @@
     <Folder Include="Views\Modules\" />
     <Folder Include="Views\Extensions\" />
     <Folder Include="Core\" />
+    <Folder Include="Core\Hal\" />
   </ItemGroup>
 </Project>
