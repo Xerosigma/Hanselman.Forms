@@ -43,7 +43,6 @@ namespace Core
 		 */
 		public static T DeserializeFromStream<T>(Stream stream, params JsonConverter[] converters)
 		{
-			// Method 1: Automatted
 			string jsonString = new StreamReader(stream).ReadToEnd();
 			T resourceObject = JsonConvert.DeserializeObject<T> (jsonString, converters);
 			return resourceObject;
