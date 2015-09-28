@@ -39,50 +39,84 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <None Include="packages.config" />
+    <None Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventPage.xaml" />
+    <None Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsPage.xaml" />
+    <None Include="Source\Hang2Gether\Sections\EventList\EventListPage.xaml" />
+    <None Include="Source\Hang2Gether\Sections\Login\LoginPage.xaml" />
+    <None Include="Source\Hang2Gether\Modules\DialogView.xaml" />
+    <None Include="Source\Hang2Gether\Modules\SnackbarView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Helpers\AudioPlayer.cs" />
-    <Compile Include="Helpers\FancyListCell.cs" />
-    <Compile Include="Helpers\IShare.cs" />
-    <Compile Include="Helpers\ITweetStore.cs" />
-    <Compile Include="Helpers\ListImageCell.cs" />
-    <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\FeedItem.cs" />
-    <Compile Include="Models\HomeMenuItem.cs" />
-    <Compile Include="Models\Scott.cs" />
-    <Compile Include="Models\Tweet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\BlogFeedViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\PodcastViewModel.cs" />
-    <Compile Include="ViewModels\TwitterViewModel.cs" />
-    <Compile Include="Views\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
+    <Compile Include="Source\Hang2Gether\Core\CollectionExtensions.cs" />
+    <Compile Include="Source\Hang2Gether\Core\GeoJsonPoint.cs" />
+    <Compile Include="Source\Hang2Gether\Core\HTTPUtils.cs" />
+    <Compile Include="Source\Hang2Gether\Core\ParsingUtils.cs" />
+    <Compile Include="Source\Hang2Gether\Core\Repository.cs" />
+    <Compile Include="Source\Hang2Gether\Core\RepositoryBase.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Attendee.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\CreateEvent\CreatEventViewModel.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventPage.xaml.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsPage.xaml.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsViewModel.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\EventList\EventListPage.xaml.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\EventList\EventListViewModel.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Events\Event.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Events\EventRepository.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Events\EventsRepository.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Events\EventsResource.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Login\LoginPage.xaml.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Login\LoginViewModel.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Places\Address.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Places\ManagerRole.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Places\Place.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\Places\PlaceRepository.cs" />
+    <Compile Include="Source\Hang2Gether\Modules\DateTimeControl.cs" />
+    <Compile Include="Source\Hang2Gether\Modules\DialogView.xaml.cs" />
+    <Compile Include="Source\Hang2Gether\Modules\SnackbarView.xaml.cs" />
+    <Compile Include="Source\Hang2Gether\Extensions\Extensions.cs" />
+    <Compile Include="Source\Hang2Gether\Util\CircleImage.cs" />
+    <Compile Include="Source\Hang2Gether\Util\DateTimeToStringConverter.cs" />
+    <Compile Include="Source\Hang2Gether\Util\ElementSource.cs" />
+    <Compile Include="Source\Hang2Gether\Util\ImageSourceToByteArrayConverter.cs" />
+    <Compile Include="Source\Hang2Gether\Util\Renderer.cs" />
+    <Compile Include="Source\Hanselman\Helpers\AudioPlayer.cs" />
+    <Compile Include="Source\Hanselman\Helpers\FancyListCell.cs" />
+    <Compile Include="Source\Hanselman\Helpers\IShare.cs" />
+    <Compile Include="Source\Hanselman\Helpers\ITweetStore.cs" />
+    <Compile Include="Source\Hanselman\Helpers\ListImageCell.cs" />
+    <Compile Include="Source\Hanselman\Models\BaseModel.cs" />
+    <Compile Include="Source\Hanselman\Models\FeedItem.cs" />
+    <Compile Include="Source\Hanselman\Models\HomeMenuItem.cs" />
+    <Compile Include="Source\Hanselman\Models\Scott.cs" />
+    <Compile Include="Source\Hanselman\Models\Tweet.cs" />
+    <Compile Include="Source\Hanselman\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Source\Hanselman\ViewModels\BlogFeedViewModel.cs" />
+    <Compile Include="Source\Hanselman\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Source\Hanselman\ViewModels\PodcastViewModel.cs" />
+    <Compile Include="Source\Hanselman\ViewModels\TwitterViewModel.cs" />
+    <Compile Include="Source\Hanselman\Views\AboutPage.xaml.cs">
+      <DependentUpon>..\..\..\Views\AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BaseView.cs" />
-    <Compile Include="Views\BlogDetailsView.cs" />
-    <Compile Include="Views\BlogPage.xaml.cs">
-      <DependentUpon>BlogPage.xaml</DependentUpon>
+    <Compile Include="Source\Hanselman\Views\BaseView.cs" />
+    <Compile Include="Source\Hanselman\Views\BlogDetailsView.cs" />
+    <Compile Include="Source\Hanselman\Views\BlogPage.xaml.cs">
+      <DependentUpon>..\..\..\Views\BlogPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomeView.cs" />
-    <Compile Include="Views\PodcastPage.xaml.cs">
-      <DependentUpon>PodcastPage.xaml</DependentUpon>
+    <Compile Include="Source\Hanselman\Views\HomeView.cs" />
+    <Compile Include="Source\Hanselman\Views\PodcastPage.xaml.cs">
+      <DependentUpon>..\..\..\Views\PodcastPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PodcastPlaybackPage.xaml.cs">
-      <DependentUpon>PodcastPlaybackPage.xaml</DependentUpon>
+    <Compile Include="Source\Hanselman\Views\PodcastPlaybackPage.xaml.cs">
+      <DependentUpon>..\..\..\Views\PodcastPlaybackPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TwitterPage.xaml.cs">
-      <DependentUpon>TwitterPage.xaml</DependentUpon>
+    <Compile Include="Source\Hanselman\Views\TwitterPage.xaml.cs">
+      <DependentUpon>..\..\..\Views\TwitterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WebsiteView.cs" />
+    <Compile Include="Source\Hanselman\Views\WebsiteView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.1.3\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="LinqToTwitterPcl">
       <HintPath>..\packages\LinqToTwitter.3.1.2\lib\portable-win8+net45+wp8\LinqToTwitterPcl.dll</HintPath>
     </Reference>
@@ -122,35 +156,30 @@
     <Reference Include="System.IO.Compression">
       <HintPath>..\packages\Microsoft.Bcl.Compression.3.9.85\lib\portable-net45+win8+wp8+wpa81\System.IO.Compression.dll</HintPath>
     </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.1.3\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AboutPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Include="Source\Hanselman\Views\AboutPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\TwitterPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Include="Source\Hanselman\Views\BlogPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\BlogPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Include="Source\Hanselman\Views\PodcastPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\PodcastPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Include="Source\Hanselman\Views\PodcastPlaybackPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\PodcastPlaybackPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Include="Source\Hanselman\Views\TwitterPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -171,4 +200,14 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Source\" />
+    <Folder Include="Source\Hang2Gether\" />
+    <Folder Include="Source\Hang2Gether\Core\" />
+    <Folder Include="Source\Hang2Gether\Sections\" />
+    <Folder Include="Source\Hang2Gether\Modules\" />
+    <Folder Include="Source\Hang2Gether\Extensions\" />
+    <Folder Include="Source\Hang2Gether\Util\" />
+    <Folder Include="Source\Hanselman\" />
+  </ItemGroup>
 </Project>

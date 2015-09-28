@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="Hanselman.Portable.Views.CreateEventPage"
+	xmlns:controls="clr-namespace:Hanselman.Portable.Helpers;assembly=Hanselman.Portable"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+	xmlns:conv="clr-namespace:Hanselman.Portable.Helpers;assembly=Hanselman.Portable"
+	Title="{Binding Title}" Icon="{Binding Icon}"  IsBusy="{Binding IsBusy}">
+
+	<ContentPage.Resources>
+
+		<ResourceDictionary>
+			<conv:ImageSourceToByteArrayConverter x:Key="bic" />
+			<conv:DateTimeToStringConverter x:Key="dtc" />
+		</ResourceDictionary>
+
+	</ContentPage.Resources>
+
+	<ContentPage.Content>
+
+		<StackLayout x:Name="contentLayout" BackgroundColor="#ffbbdefb">
+			<ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" Padding="10">
+				<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+
+					<Entry x:Name="eventNameEntry" Text="{Binding Event.Name}" Placeholder="Event Name" TextColor="#757575"/>
+
+					<Entry x:Name="address" Text="{Binding Event.Place.Address.Street}" Placeholder="Event Address" TextColor="#757575"/>
+
+					<Grid VerticalOptions="FillAndExpand">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="0.60*"/>
+							<ColumnDefinition Width="0.10*"/>
+							<ColumnDefinition Width="0.30*"/>
+						</Grid.ColumnDefinitions>
+
+						<Entry
+		                	Grid.Column="0"
+							x:Name="city" Text="{Binding Event.Place.Address.City}" Placeholder="City" TextColor="#757575"/>
+
+						<Entry
+		                	Grid.Column="1"
+							x:Name="state" Text="{Binding Event.Place.Address.State}" Placeholder="State" TextColor="#757575"/>
+
+						<Entry
+		                	Grid.Column="2"
+							x:Name="zip" Text="{Binding Event.Place.Address.Zip}" Placeholder="Zip" TextColor="#757575"/>
+
+		            </Grid>
+
+					<!-- TODO: Show location on map. -->
+					<!-- <maps:Map x:Name="eventMap" WidthRequest="320" HeightRequest="200" IsShowingUser="true" MapType="Hybrid"/> -->
+
+					<Image x:Name="eventImage" Source="{Binding EventImage, Converter={StaticResource bic}}"/>
+
+					<!-- TODO: Select/Capture dialog instead of just select. -->
+					<Button x:Name="selectPhoto" Text="Select Event Photo" Command="{Binding EventPhotoCommand}" CommandParameter="{x:Reference eventImage}"/>
+
+					<controls:DateTimeControl x:Name="startTime" Value="{Binding Event.StartTime, Converter={StaticResource dtc}"/>
+
+					<controls:DateTimeControl x:Name="endTime" Value="{Binding Event.EndTime, Converter={StaticResource dtc}"/>
+
+					<Button x:Name="submitButton" Text="Launch Event" Command="{Binding SubmitCommand}"/>
+
+				</StackLayout>
+			</ScrollView>
+
+			<controls:SnackbarView x:Name="snackbarView" IsVisible="false"/>
+
+		</StackLayout>
+
+	</ContentPage.Content>
+</ContentPage>

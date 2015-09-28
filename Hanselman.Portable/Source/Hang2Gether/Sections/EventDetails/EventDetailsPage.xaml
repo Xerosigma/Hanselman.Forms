@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="Hanselman.Portable.Views.EventDetailsPage"
+	xmlns:controls="clr-namespace:Hanselman.Portable.Helpers;assembly=Hanselman.Portable"
+	Title="{Binding Title}" Icon="{Binding Icon}"  IsBusy="{Binding IsBusy}">
+
+	<StackLayout x:Name="contentLayout" BackgroundColor="#ffbbdefb">
+
+		<StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+
+			<!-- Photo Section -->
+			<StackLayout Orientation="Vertical">
+				<RelativeLayout x:Name="EventImageLayout">
+
+					<StackLayout>
+		                <Image x:Name="EventImage" Source="http://tinyurl.com/lc7hnty"/>
+		            </StackLayout>
+
+	                <Label
+	                	RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}"
+	                	RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}"
+	                	x:Name="eventTitleAnchor" Text="{Binding Event.Name}" FontSize="Large" TextColor="#ffffffff" LineBreakMode="NoWrap" FontAttributes="Bold"/>
+	                <Label
+	                	RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=eventTitleAnchor, Property=Width, Factor=0.50}"
+	                	RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}"
+	                	x:Name="eventTitleTarget" Text="{Binding Event.Name}" FontSize="Large" TextColor="#ffff00ff" LineBreakMode="NoWrap" FontAttributes="Bold"/>
+
+	            </RelativeLayout>
+            </StackLayout>
+
+            <!-- Mid Section -->
+            <Grid ColumnSpacing="0" RowSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.70*"/>
+                <ColumnDefinition Width="0.30*"/>
+              </Grid.ColumnDefinitions>
+
+			<StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="12,0,12,16">
+                <Label x:Name="dismiss" Text="Hangin'" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+			    	<Label.GestureRecognizers>
+			    	</Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+			<StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Start" HorizontalOptions="End" Padding="12,0,12,16">
+                <Label x:Name="tentative" Text="RSVP" FontSize="Medium" TextColor="#ff1976d2" LineBreakMode="NoWrap" FontAttributes="Bold">
+			    	<Label.GestureRecognizers>
+			    		<TapGestureRecognizer Command="{Binding AttendingCommand}"/>
+			    	</Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            </Grid>
+
+    <ListView x:Name="listView"
+              ItemsSource="{Binding Attendees}"
+              SelectedItem="{Binding SelectedItem}"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding LoadEventsCommand}"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              BackgroundColor="#ffffffff">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid ColumnSpacing="0" RowSpacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.20*"/>
+                <ColumnDefinition Width="0.60*"/>
+                <ColumnDefinition Width="0.20*"/>
+              </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Grid.Row="0">
+            	<Image HeightRequest="48" WidthRequest="48" Source="http://tinyurl.com/mjlb962" />
+            </StackLayout>
+
+            <StackLayout Grid.Column="1" Grid.Row="0" VerticalOptions="Center">
+                <Label Text="{Binding Name}" FontSize="Small" TextColor="#ff1976d2" LineBreakMode="NoWrap"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="EndAndExpand" Padding="0,0,12,0">
+                <Label Text="{Binding Name}" FontSize="Small" TextColor="#ff1976d2" LineBreakMode="NoWrap"/>
+            </StackLayout>
+
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+		<!-- NOTE: Decent spot for a footer -->
+		</StackLayout>
+
+	<controls:SnackbarView x:Name="snackbarView" IsVisible="false"/>
+
+	<!---<controls:DialogView x:Name="dialogView" IsVisible="false"/>-->
+
+	</StackLayout>
+</ContentPage>
