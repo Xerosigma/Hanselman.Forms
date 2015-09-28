@@ -118,7 +118,7 @@ namespace Hanselman.Portable
 			Renderer.ShowSnack("Event Saved.", null);
 
 			//Device.BeginInvokeOnMainThread (() => {
-				//TODO: NavigationController.Navigate(new EventDetailsPage(response.content), MenuType.EventDetails);
+				NavigationController.Navigate(new EventDetailsPage(response.content), MenuType.EventDetails);
 				//Navigation.PushAsync(new NavigationPage(new EventDetailsPage(response.content)));
 				//Navigation.PushAsync(new EventDetailsPage(response.content));
 				//Navigation.PushModalAsync(new EventDetailsPage(response.content));

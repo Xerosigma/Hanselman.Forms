@@ -34,7 +34,7 @@ namespace HanselmanAndroid
 
 
 			Forms.Init(this, bundle);
-			// FIXME: Xamarin.FormsMaps.Init(this, bundle);
+			Xamarin.FormsMaps.Init(this, bundle);
             ImageCircleRenderer.Init();
 
 			LoadApplication(new App());
