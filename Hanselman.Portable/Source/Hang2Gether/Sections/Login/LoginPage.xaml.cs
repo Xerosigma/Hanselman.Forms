@@ -11,12 +11,14 @@ namespace Hanselman.Portable.Views
 {
 	public partial class LoginPage : ContentPage, Renderer
 	{
+		public NavigationController NavigationController { get; private set; }
+
 		private LoginViewModel ViewModel
 		{
 			get { return BindingContext as LoginViewModel; }
 		}
 
-		public LoginPage ()
+		public LoginPage (NavigationController navigationController)
 		{
 			InitializeComponent ();
 

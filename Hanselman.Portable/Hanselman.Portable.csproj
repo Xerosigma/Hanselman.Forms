@@ -39,12 +39,6 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <None Include="packages.config" />
-    <None Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventPage.xaml" />
-    <None Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsPage.xaml" />
-    <None Include="Source\Hang2Gether\Sections\EventList\EventListPage.xaml" />
-    <None Include="Source\Hang2Gether\Sections\Login\LoginPage.xaml" />
-    <None Include="Source\Hang2Gether\Modules\DialogView.xaml" />
-    <None Include="Source\Hang2Gether\Modules\SnackbarView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
@@ -56,25 +50,16 @@
     <Compile Include="Source\Hang2Gether\Core\Repository.cs" />
     <Compile Include="Source\Hang2Gether\Core\RepositoryBase.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Attendee.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\CreateEvent\CreatEventViewModel.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventPage.xaml.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsPage.xaml.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsViewModel.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\EventList\EventListPage.xaml.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\EventList\EventListViewModel.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Events\Event.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Events\EventRepository.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Events\EventsRepository.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Events\EventsResource.cs" />
-    <Compile Include="Source\Hang2Gether\Sections\Login\LoginPage.xaml.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Login\LoginViewModel.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Places\Address.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Places\ManagerRole.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Places\Place.cs" />
     <Compile Include="Source\Hang2Gether\Sections\Places\PlaceRepository.cs" />
     <Compile Include="Source\Hang2Gether\Modules\DateTimeControl.cs" />
-    <Compile Include="Source\Hang2Gether\Modules\DialogView.xaml.cs" />
-    <Compile Include="Source\Hang2Gether\Modules\SnackbarView.xaml.cs" />
     <Compile Include="Source\Hang2Gether\Extensions\Extensions.cs" />
     <Compile Include="Source\Hang2Gether\Util\CircleImage.cs" />
     <Compile Include="Source\Hang2Gether\Util\DateTimeToStringConverter.cs" />
@@ -88,12 +73,9 @@
     <Compile Include="Source\Hanselman\Helpers\ListImageCell.cs" />
     <Compile Include="Source\Hanselman\Models\BaseModel.cs" />
     <Compile Include="Source\Hanselman\Models\FeedItem.cs" />
-    <Compile Include="Source\Hanselman\Models\HomeMenuItem.cs" />
     <Compile Include="Source\Hanselman\Models\Scott.cs" />
     <Compile Include="Source\Hanselman\Models\Tweet.cs" />
-    <Compile Include="Source\Hanselman\ViewModels\BaseViewModel.cs" />
     <Compile Include="Source\Hanselman\ViewModels\BlogFeedViewModel.cs" />
-    <Compile Include="Source\Hanselman\ViewModels\HomeViewModel.cs" />
     <Compile Include="Source\Hanselman\ViewModels\PodcastViewModel.cs" />
     <Compile Include="Source\Hanselman\ViewModels\TwitterViewModel.cs" />
     <Compile Include="Source\Hanselman\Views\AboutPage.xaml.cs">
@@ -104,7 +86,6 @@
     <Compile Include="Source\Hanselman\Views\BlogPage.xaml.cs">
       <DependentUpon>..\..\..\Views\BlogPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Source\Hanselman\Views\HomeView.cs" />
     <Compile Include="Source\Hanselman\Views\PodcastPage.xaml.cs">
       <DependentUpon>..\..\..\Views\PodcastPage.xaml</DependentUpon>
     </Compile>
@@ -115,6 +96,32 @@
       <DependentUpon>..\..\..\Views\TwitterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Source\Hanselman\Views\WebsiteView.cs" />
+    <Compile Include="Source\Hang2Gether\NavigationController.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsViewModel.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventViewModel.cs" />
+    <Compile Include="Source\HomeView.cs" />
+    <Compile Include="Source\BaseViewModel.cs" />
+    <Compile Include="Source\HomeViewModel.cs" />
+    <Compile Include="Source\HomeMenuItem.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\EventList\EventListPage.xaml.cs">
+      <DependentUpon>EventListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Hang2Gether\Sections\EventList\EventListViewModel.cs" />
+    <Compile Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventPage.xaml.cs">
+      <DependentUpon>CreateEventPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Hang2Gether\Sections\Login\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Hang2Gether\Modules\SnackbarView.xaml.cs">
+      <DependentUpon>SnackbarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Hang2Gether\Modules\DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsPage.xaml.cs">
+      <DependentUpon>EventDetailsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqToTwitterPcl">
@@ -144,20 +151,50 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.1.4.4.6392\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.1.4.4.6392\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.1.4.4.6392\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Compression">
       <HintPath>..\packages\Microsoft.Bcl.Compression.3.9.85\lib\portable-net45+win8+wp8+wpa81\System.IO.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.1.3.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.1.3\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.1.5.0.6447\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.1.5.0.6447\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.1.5.0.6447\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.1.5\lib\portable-net45+wp8+win8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\Portable-Net45+WinRT45+WP8+WPA81\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Maps">
+      <HintPath>..\packages\Xamarin.Forms.Maps.1.5.0.6447\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Core">
+      <HintPath>..\packages\XLabs.Core.2.0.5743-pre8\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Ioc">
+      <HintPath>..\packages\XLabs.IoC.2.0.5743-pre8\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1+Xamarin.iOS10\XLabs.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifLib">
+      <HintPath>..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Platform">
+      <HintPath>..\packages\XLabs.Platform.2.0.5743-pre8\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Serialization">
+      <HintPath>..\packages\XLabs.Serialization.2.0.5743-pre8\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="XLabs.Forms">
+      <HintPath>..\packages\XLabs.Forms.2.0.5743-pre8\lib\portable-net45+netcore45+wpa81+wp8\XLabs.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Auth">
+      <HintPath>..\packages\Xamarin.Auth.0.0.2-alpha\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+XamarinIOS10\Xamarin.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="HALClient">
+      <HintPath>..\Lib\HALClient.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +218,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\Hang2Gether\Sections\CreateEvent\CreateEventPage.xaml" />
+    <EmbeddedResource Include="Source\Hang2Gether\Sections\EventList\EventListPage.xaml" />
+    <EmbeddedResource Include="Source\Hang2Gether\Sections\Login\LoginPage.xaml" />
+    <EmbeddedResource Include="Source\Hang2Gether\Modules\SnackbarView.xaml" />
+    <EmbeddedResource Include="Source\Hang2Gether\Modules\DialogView.xaml" />
+    <EmbeddedResource Include="Source\Hang2Gether\Sections\EventDetails\EventDetailsPage.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
@@ -192,7 +235,7 @@
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Import Project="..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.1.5.0.6447\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.0.6447\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

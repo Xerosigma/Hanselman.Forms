@@ -10,17 +10,19 @@ using Hanselman.Portable.Helpers;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-using Xamarin.Forms.Labs.Controls;
-using Xamarin.Forms.Labs;
-using Xamarin.Forms.Labs.Services;
-using Xamarin.Forms.Labs.Services.Media;
+
+using XLabs.Forms.Controls;
+using XLabs.Platform.Device;
+using XLabs.Ioc;
+using XLabs.Platform.Services;
+using XLabs.Platform.Services.Media;
 
 using Core;
 using Hanselman.Portable.Views;
 
 namespace Hanselman.Portable
 {
-	public class CreatEventViewModel : BaseViewModel
+	public class CreateEventViewModel : BaseViewModel
 	{
 		private readonly static string OPTION_CAMERA = "From Camera";
 		private readonly static string OPTION_GALLERY = "From Gallery";
@@ -32,7 +34,7 @@ namespace Hanselman.Portable
 
 		private IMediaPicker _mediaPicker;
 
-		public CreatEventViewModel(NavigationController navigationController)
+		public CreateEventViewModel(NavigationController navigationController)
 		{
 			NavigationController = navigationController;
 			Title = "Create Event";
@@ -116,7 +118,7 @@ namespace Hanselman.Portable
 			Renderer.ShowSnack("Event Saved.", null);
 
 			//Device.BeginInvokeOnMainThread (() => {
-				NavigationController.Navigate(new EventDetailsPage(response.content), MenuType.EventDetails);
+				//TODO: NavigationController.Navigate(new EventDetailsPage(response.content), MenuType.EventDetails);
 				//Navigation.PushAsync(new NavigationPage(new EventDetailsPage(response.content)));
 				//Navigation.PushAsync(new EventDetailsPage(response.content));
 				//Navigation.PushModalAsync(new EventDetailsPage(response.content));

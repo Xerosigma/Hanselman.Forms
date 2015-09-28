@@ -9,10 +9,10 @@ using LinqToTwitter;
 using Hanselman.Portable.Helpers;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Labs.Controls;
-using Xamarin.Forms.Labs;
-using Xamarin.Forms.Labs.Services;
-using Xamarin.Forms.Labs.Services.Media;
+
+using XLabs.Forms.Controls;
+using XLabs.Platform.Services;
+using XLabs.Platform.Services.Media;
 
 using Core;
 

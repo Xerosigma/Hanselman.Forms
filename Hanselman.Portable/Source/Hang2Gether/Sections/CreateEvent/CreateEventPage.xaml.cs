@@ -14,11 +14,11 @@ namespace Hanselman.Portable.Views
 {
 	public partial class CreateEventPage : ContentPage, Renderer
 	{
-		public NavigationController NavigationController { get; private set;}
+		public NavigationController NavigationController { get; private set; }
 
-		private CreatEventViewModel ViewModel
+		private CreateEventViewModel ViewModel
 		{
-			get { return BindingContext as CreatEventViewModel; }
+			get { return BindingContext as CreateEventViewModel; }
 		}
 
 		public CreateEventPage (NavigationController navigationController)
@@ -27,7 +27,7 @@ namespace Hanselman.Portable.Views
 
 			NavigationController = navigationController;
 
-			BindingContext = new CreatEventViewModel(NavigationController);
+			BindingContext = new CreateEventViewModel(NavigationController);
 
 			ViewModel.Renderer = this;
 

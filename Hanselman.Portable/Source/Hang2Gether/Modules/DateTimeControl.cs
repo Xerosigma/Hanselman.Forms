@@ -2,8 +2,11 @@
 using System.ComponentModel;
 using System.Globalization;
 using Xamarin.Forms;
-using Xamarin.Forms.Labs;
-using Xamarin.Forms.Labs.Services;
+
+using XLabs.Forms.Controls;
+using XLabs.Platform.Device;
+using XLabs.Ioc;
+using XLabs.Platform.Services;
 
 namespace Hanselman.Portable.Helpers
 {

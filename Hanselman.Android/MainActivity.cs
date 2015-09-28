@@ -2,16 +2,22 @@
 
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
+using Android.Graphics.Drawables;
+using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
-using Xamarin.Forms.Platform.Android;
+
 using Xamarin.Forms;
-using Android.Content.PM;
-using Hanselman.Portable;
-using Android.Graphics.Drawables;
+using Xamarin.Forms.Platform.Android;
+
 using ImageCircle.Forms.Plugin.Droid;
+
+using XLabs.Platform.Device;
+using XLabs.Ioc;
+
+using Hanselman.Portable;
 
 namespace HanselmanAndroid
 {
@@ -27,9 +33,17 @@ namespace HanselmanAndroid
             base.OnCreate(bundle);
 
 
-            Forms.Init(this, bundle);
+			Forms.Init(this, bundle);
+			// FIXME: Xamarin.FormsMaps.Init(this, bundle);
             ImageCircleRenderer.Init();
-            LoadApplication(new App());
+
+			LoadApplication(new App());
+
+			if (!Resolver.IsSet) {
+				SimpleContainer resolverContainer = new SimpleContainer ();
+				resolverContainer.Register<IDevice> (r => AndroidDevice.CurrentDevice);
+				Resolver.SetResolver (resolverContainer.GetResolver ());
+			}
 
             if ((int)Android.OS.Build.VERSION.SdkInt >= 21)
             {

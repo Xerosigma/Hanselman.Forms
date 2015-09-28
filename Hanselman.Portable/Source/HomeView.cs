@@ -63,7 +63,7 @@ namespace Hanselman.Portable
   }
 
 
-  public class HomeMasterView : BaseView
+	public class HomeMasterView : BaseView, NavigationController
   {
     public Action<MenuType> PageSelectionChanged;
     private Page pageSelection;
@@ -78,7 +78,7 @@ namespace Hanselman.Portable
           PageSelectionChanged(menuType);
       }
     }
-    private Page about, blog, twitter, hanselminutes, ratchet, developerlife;
+    private Page about, blog, twitter, hanselminutes, ratchet, developerlife, createEvent, events, login;
     public HomeMasterView(HomeViewModel viewModel)
     {
       this.Icon = "slideout.png";
@@ -167,7 +167,28 @@ namespace Hanselman.Portable
               ratchet = new PodcastPage(menuItem);
 
             PageSelection = ratchet;
-            break;
+					break;
+
+			case MenuType.Events:
+				if (events == null)
+					events = new EventListPage(this);
+
+				PageSelection = events;
+				break;
+
+			case MenuType.CreateEvent:
+				if (createEvent == null)
+					createEvent = new CreateEventPage(this);
+
+				PageSelection = createEvent;
+				break;
+
+			case MenuType.Login:
+				if (login == null)
+					login = new LoginPage(this);
+
+				PageSelection = login;
+				break;
         }
       };
 
@@ -175,8 +196,14 @@ namespace Hanselman.Portable
       layout.Children.Add(listView);
 
       Content = layout;
-    }
-  }
+		}
 
+	public void Navigate (Page page, MenuType type) {
+		Device.BeginInvokeOnMainThread (() => {
+			menuType = type;
+			PageSelection = page;
+		});
+	}
+  }
 }
 

@@ -7,9 +7,13 @@ namespace Hanselman.Portable
 		About,
 		Blog,
 		Twitter,
-    Hanselminutes,
-    Ratchet,
-    DeveloperLife
+		Hanselminutes,
+		Ratchet,
+		DeveloperLife,
+		Events,
+		CreateEvent,
+		Login,
+		EventDetails
 	}
 	public class HomeMenuItem : BaseModel
 	{
@@ -17,7 +21,7 @@ namespace Hanselman.Portable
 		{
 			MenuType = MenuType.About;
 		}
-		public string Icon {get;set;}
+		public string Icon { get;set; }
 		public MenuType MenuType { get; set; }
 	}
 }

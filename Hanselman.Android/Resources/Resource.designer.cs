@@ -28,6 +28,8 @@ namespace HanselmanAndroid
 		{
 			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::HanselmanAndroid.Resource.String.ApplicationName;
 			global::Xamarin.Forms.Platform.Resource.String.Hello = global::HanselmanAndroid.Resource.String.Hello;
+			global::XLabs.Platform.Resource.String.ApplicationName = global::HanselmanAndroid.Resource.String.ApplicationName;
+			global::XLabs.Platform.Resource.String.Hello = global::HanselmanAndroid.Resource.String.Hello;
 		}
 		
 		public partial class Animation
