@@ -1,11 +1,7 @@
 Hanselman.Forms: Hanselman Everywhere
 ===============
 
-[![Join the chat at https://gitter.im/jamesmontemagno/Hanselman.Forms](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jamesmontemagno/Hanselman.Forms?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-## IMPORTANT
-This branch is using the new Preview release of Xamarin.Forms for Windows Store.Please see documentation here:  http://developer.xamarin.com/guides/cross-platform/xamarin-forms/windows/getting-started/
-
+Built with C# 6 features, you must be running VS 2015 or Xamarin Studio to compile.
 
 The most awesome Hanselman app built in about 4 hours to showcase a sample of [Xamarin.Forms](http://www.xamarin.com/forms). Be sure to read [Scott's](http://www.twitter.com/shanselman) blog: http://www.hanselman.com/blog/XamarinFormsWriteOnceRunEverywhereANDBeNative.aspx
 
@@ -32,7 +28,7 @@ Xamarin.Forms is now available in PREVIEW for Windows Store and Windows Phone 8.
 
 Android Wear
 ===
-To setup Android wear simply install the main Hanselman app on your Android Phone and then the **WearApp** on your Android Wear device. HanselWear uses Google Play Services to syncronize Tweets from the main application. The code for this sync can be found in WearService.cs.
+To setup Android wear simply install the main Hanselman app on your Android Phone and then the **WearApp** on your Android Wear device. HanselWear uses Google Play Services to synchronize Tweets from the main application. The code for this sync can be found in WearService.cs.
 
 To find out more how to get started with Android Wear with Xamarin please visit: http://developer.xamarin.com/guides/android/wear/
 

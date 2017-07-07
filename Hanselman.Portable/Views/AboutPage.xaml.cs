@@ -5,46 +5,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Plugin.Share;
+using Hanselman.Portable.Helpers;
 
 namespace Hanselman.Portable.Views
 {
-  public partial class AboutPage : ContentPage
-  {
-    public AboutPage()
+    public partial class AboutPage : ContentPage
     {
-      InitializeComponent();
 
-      twitter.GestureRecognizers.Add(new TapGestureRecognizer()
-        { 
-          Command = new Command(() =>
-          {
-            this.Navigation.PushAsync(new WebsiteView("http://m.twitter.com/shanselman", "@shanselman"));
-          })
-        });
-
-     facebook.GestureRecognizers.Add(new TapGestureRecognizer()
-      {
-        Command= new Command(() =>
+        void OpenBrowser(string url)
         {
-          this.Navigation.PushAsync(new WebsiteView("http://facebook.com/scott.hanselman", "Scott @Facebook"));
-        })
-      });
-
-     instagram.GestureRecognizers.Add(new TapGestureRecognizer()
-      {
-        Command = new Command(() =>
+            CrossShare.Current.OpenBrowser(url, new Plugin.Share.Abstractions.BrowserOptions
+            {
+                ChromeShowTitle = true,
+                ChromeToolbarColor = new Plugin.Share.Abstractions.ShareColor { R = 3, G = 169, B = 244, A = 255 },
+                UseSafariReaderMode = true,
+                UseSafariWebViewController = true
+            });
+        }
+        public AboutPage()
         {
-          this.Navigation.PushAsync(new WebsiteView("http://instagram.com/shanselman", "Scott @Instagram"));
-        })
-      });
+            InitializeComponent();
 
-      google.GestureRecognizers.Add(new TapGestureRecognizer()
-      {
-        Command = new Command(() =>
-        {
-          this.Navigation.PushAsync(new WebsiteView("http://plus.google.com/108573066018819777334?rel=me", "Hanselman+"));
-        })
-      });
+            twitter.GestureRecognizers.Add(new TapGestureRecognizer()
+            {
+                Command = new Command(() =>
+                {
+                    //try to launch twitter or tweetbot app, else launch browser
+                    var launch = DependencyService.Get<ILaunchTwitter>();
+                    if(launch == null || !launch.OpenUserName("shanselman"))
+                        OpenBrowser("http://m.twitter.com/shanselman");
+                })
+            });
+
+            facebook.GestureRecognizers.Add(new TapGestureRecognizer()
+            {
+                Command = new Command(() => OpenBrowser("https://m.facebook.com/shanselman"))
+            });
+
+
+            instagram.GestureRecognizers.Add(new TapGestureRecognizer()
+            {
+                Command = new Command(() => OpenBrowser("https://www.instagram.com/shanselman"))
+            });
+
+
+
+        }
     }
-  }
 }

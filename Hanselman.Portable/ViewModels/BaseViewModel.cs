@@ -1,101 +1,121 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Hanselman.Portable
 {
-	public class BaseViewModel : INotifyPropertyChanged
-	{
-		public BaseViewModel ()
-		{
-		}
+    public class BaseViewModel : INotifyPropertyChanged
+    {
+        public BaseViewModel()
+        {
+        }
 
-		private string title = string.Empty;
-		public const string TitlePropertyName = "Title";
+        private string title = string.Empty;
+        public const string TitlePropertyName = "Title";
 
-		/// <summary>
-		/// Gets or sets the "Title" property
-		/// </summary>
-		/// <value>The title.</value>
-		public string Title
-		{
-			get { return title; }
-			set { SetProperty (ref title, value, TitlePropertyName);}
-		}
+        /// <summary>
+        /// Gets or sets the "Title" property
+        /// </summary>
+        /// <value>The title.</value>
+        public string Title
+        {
+            get { return title; }
+            set { SetProperty(ref title, value); }
+        }
 
-		private string subTitle = string.Empty;
-		/// <summary>
-		/// Gets or sets the "Subtitle" property
-		/// </summary>
-		public const string SubtitlePropertyName = "Subtitle";
-		public string Subtitle
-		{
-			get { return subTitle; }
-			set { SetProperty (ref subTitle, value, SubtitlePropertyName);}
-		}
+        private string subtitle = string.Empty;
+        /// <summary>
+        /// Gets or sets the "Subtitle" property
+        /// </summary>
+        public const string SubtitlePropertyName = "Subtitle";
+        public string Subtitle
+        {
+            get { return subtitle; }
+            set { SetProperty(ref subtitle, value); }
+        }
 
-		private string icon = null;
-		/// <summary>
-		/// Gets or sets the "Icon" of the viewmodel
-		/// </summary>
-		public const string IconPropertyName = "Icon";
-		public string Icon
-		{
-			get { return icon; }
-			set { SetProperty (ref icon, value, IconPropertyName);}
-		}
+        private string icon = null;
+        /// <summary>
+        /// Gets or sets the "Icon" of the viewmodel
+        /// </summary>
+        public const string IconPropertyName = "Icon";
+        public string Icon
+        {
+            get { return icon; }
+            set { SetProperty(ref icon, value); }
+        }
 
-		private bool isBusy;
-		/// <summary>
-		/// Gets or sets if the view is busy.
-		/// </summary>
-		public const string IsBusyPropertyName = "IsBusy";
-		public bool IsBusy 
-		{
-			get { return isBusy; }
-			set { SetProperty (ref isBusy, value, IsBusyPropertyName);}
-		}
+        bool isBusy;
 
-		private bool canLoadMore = true;
-		/// <summary>
-		/// Gets or sets if we can load more.
-		/// </summary>
-		public const string CanLoadMorePropertyName = "CanLoadMore";
-		public bool CanLoadMore
-		{
-			get { return canLoadMore; }
-			set { SetProperty (ref canLoadMore, value, CanLoadMorePropertyName);}
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is busy.
+        /// </summary>
+        /// <value><c>true</c> if this instance is busy; otherwise, <c>false</c>.</value>
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                if (SetProperty(ref isBusy, value))
+                    IsNotBusy = !isBusy;
+            }
+        }
 
-		protected void SetProperty<T>(
-			ref T backingStore, T value,
-			string propertyName,
-			Action onChanged = null) 
-		{
-		
+        bool isNotBusy = true;
 
-			if (EqualityComparer<T>.Default.Equals(backingStore, value)) 
-				return;
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is not busy.
+        /// </summary>
+        /// <value><c>true</c> if this instance is not busy; otherwise, <c>false</c>.</value>
+        public bool IsNotBusy
+        {
+            get { return isNotBusy; }
+            private set { SetProperty(ref isNotBusy, value); }
+        }
 
-			backingStore = value;
+        private bool canLoadMore = true;
+        /// <summary>
+        /// Gets or sets if we can load more.
+        /// </summary>
+        public const string CanLoadMorePropertyName = "CanLoadMore";
+        public bool CanLoadMore
+        {
+            get { return canLoadMore; }
+            set { SetProperty(ref canLoadMore, value); }
+        }
 
-			if (onChanged != null) 
-				onChanged();
+        protected bool SetProperty<T>(
+            ref T backingStore, T value,
+            [CallerMemberName]string propertyName = "",
+            Action onChanged = null)
+        {
 
-			OnPropertyChanged(propertyName);
-		}
 
-		#region INotifyPropertyChanged implementation
-		public event PropertyChangedEventHandler PropertyChanged;
-		#endregion
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			if (PropertyChanged == null)
-				return;
+            backingStore = value;
 
-			PropertyChanged (this, new PropertyChangedEventArgs (propertyName));
-		}
-	}
+            if (onChanged != null)
+                onChanged();
+
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            var changed = PropertyChanged;
+            if (changed == null)
+                return;
+
+            changed(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }
 

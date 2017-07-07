@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Hanselman.Portable;
 using ImageCircle.Forms.Plugin.iOS;
+using Plugin.MediaManager.Forms;
+using Plugin.MediaManager.Forms.iOS;
 
 namespace Hanselman.iOS
 {
@@ -35,8 +37,10 @@ namespace Hanselman.iOS
                     TextColor = UIColor.White
                 });
             Forms.Init();
+            VideoViewRenderer.Init();
             ImageCircleRenderer.Init();
             LoadApplication(new App());
+            
 
             return base.FinishedLaunching(app, options);
         }
